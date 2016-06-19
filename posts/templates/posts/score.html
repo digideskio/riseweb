@@ -1,0 +1,194 @@
+{% extends 'posts/base.html' %}
+{% load staticfiles %}
+{% block main %}
+    <div class="container">
+        <div class="page-nav__offset row-fluid -bp20 -bp30-hdn" id="cricketHeader">
+            <div class="match-header mh-pre">
+                <div class="-center text-h5">Day 1 of 1</div>
+                <div class="row-table -bp20 -bp30">
+                    <div class="box col">
+                        <img class="badges -left img-circle" src="{{ teamNames.teamInfo.homelogo }}" alt="Badge">
+                        <h2 class="text-h1 -txt-right">{{ teamNames.teamInfo.hometeam }} </h2>
+                        <h3 class="text-h2 -txt-right" id="scoresum-Yorks">{{ teamNames.teamInfo.homeScore }}</h3>
+                    </div>
+                    <div class="box col span10 -center -bp20-hdn -bp30-hdn">
+                        <span class="text-h2 strap2 -interact">Result</span>
+                    </div>
+                    <div class="box col">
+                        <img class="badges -right img-circle" src="{{ teamNames.teamInfo.awaylogo }}" alt="Badge">
+                        <h2 class="text-h1">{{ teamNames.teamInfo.awayteam }}</h2>
+                        <h3 class="text-h2" id="scoresum-10">{{ teamNames.teamInfo.awayScore }}</h3>
+                    </div>
+                </div>
+                <div class="-center text-h5">{{ teamNames.teamInfo.result }}</div>
+            </div>
+        </div>
+
+
+        <section class="main-contents">
+            <div class="row">
+                <div class="col-md-8">
+                   <div id="match-accordian" class="accordian">
+                        <h4 class="item strap1 -interact tab1" data-team="3">
+                            <a id="tabbtn-0" href="#tabbox0" class="button text-h4" data-role="tab-item">
+                            {{ teamNames.teamInfo.hometeam }} 1st Innings
+                                <span class="highlight"> {{ teamNames.teamInfo.homeScore }}</span>
+                            </a>
+                        </h4>
+                        <div class="tab-area on" data-role="tab-box" id="tabbox0">
+                            <div class="box" data-team="3">
+                                <table class="table table-cricket-batting skynews -small -txt-right" title="Yorks Batting">
+                                    <caption class="team-name">{{ teamNames.teamInfo.hometeam }} Batting</caption>
+                                    <tbody>
+                                        <tr class="rbo">
+                                            <th class="t-name" title="Name"></th>
+                                            <th class="t-detail" title="Details"></th>
+                                            <th class="t-runs" title="Runs">Runs</th>
+                                            <th class="t-balls" title="Balls">B</th>
+                                            <th class="t-4s" title="Fours">4<small>s</small></th>
+                                            <th class="t-6s" title="Sixes">6<small>s</small></th>
+                                            <th class="t-sr -txt-right" title="Strike Rate">SR</th>
+                                        </tr>
+
+
+                                        {% for player in team1_batsmen %}
+                                            <tr class="player-score">
+                                               <td class="t-name"><a href="#">{{ player.name }} </a></td>
+                                               <td class="t-detail">{{ player.howOut }}</td>
+                                               <td class="t-runs">{{ player.runs }}</td>
+                                               <td class="t-balls">{{ player.balls }}</td>
+                                               <td class="t-4s">{{ player.fours }}</td>
+                                               <td class="t-6s">{{ player.sixes }}</td>
+                                               <td class="t-sr">{{ player.strikeRate }}</td>
+                                            </tr>
+                                        {% endfor %}
+{#                                        <tr class="player-score">#}
+{#                                            <td class="t-name text-h5">Extras</td>#}
+{#                                            <td class="t-detail">#}
+{#                                                {% for extras in team1_extra %}#}
+{#                                                    {{ extras }}lb, 4w,  2lb</td>#}
+{##}
+{#                                                {% endfor %}#}
+{#                                            </td>#}
+{#                                            <td class="t-runs">10</td>#}
+{#                                            <td class="t-balls"></td>#}
+{#                                            <td class="t-4s"></td>#}
+{#                                            <td class="t-6s"></td>#}
+{#                                            <td class="t-sr"></td>#}
+{#                                        </tr>#}
+
+
+
+                                        <tr class="player-score">
+                                          <td class="t-name text-h5">Total</td>
+                                          <td class="t-detail">47.3 Overs, 8 wkts</td>
+                                          <td class="rbo">314</td>
+                                          <td class="t-balls"></td>
+                                          <td class="t-4s"></td>
+                                          <td class="t-6s"></td>
+                                          <td class="t-sr"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+                            <div class="box box-border ">
+                                <h3 class="text-h4 -caps">Fall of Wickets</h3>
+                                <ol class="list list-fow -float -center">
+                                      {% for player in team1_batsmen %}
+                                            <li class="item span1/10 -m0">
+                                                <b class="fow-score">{{ player.fallOfWicket }}</b>
+                                                <small>{{ player.name }}</small>
+                                                <small>{{ player.fallOfWicketOver }}</small>
+                                            </li>
+                                      {% endfor %}
+
+                                </ol>
+                            </div>
+                                <div class="tab-area on" data-role="tab-box" id="tabbox0">
+                                <div class="box" data-team="3">
+                                <table class="table table-cricket-batting skynews -small -txt-right" title="Yorks Batting">
+                                    <caption class="team-name">{{ teamNames.teamInfo.awayteam }} Bowling</caption>
+                                    <tbody>
+                                        <tr class="rbo">
+                                            <th class="t-name" title="Name"></th>
+                                            <th class="t-detail" title="Details"></th>
+                                            <th class="t-runs" title="Runs">O</th>
+                                            <th class="t-balls" title="Balls">M</th>
+                                            <th class="t-4s" title="Fours">R</th>
+                                            <th class="t-6s" title="Sixes">W</th>
+                                            <th class="t-sr -txt-right" title="Strike Rate">Econ</th>
+                                        </tr>
+
+
+                                        {% for player in team2_bowlers %}
+                                            <tr class="player-score">
+                                               <td class="t-name"><a href="#">{{ player.name }} </a></td>
+                                               <td class="t-detail"></td>
+                                               <td class="t-runs">{{ player.overs }}</td>
+                                               <td class="t-balls">{{ player.maidens }}</td>
+                                               <td class="t-4s">{{ player.runsConceded }}</td>
+                                               <td class="t-6s">{{ player.wickets }}</td>
+                                               <td class="t-sr">{{ player.economy }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="page-nav__offset">
+                        <div class="box col span1 -rhn-nav" style="background-color:#010368;">
+                            <div class="arrow_box">
+                                Scorecard
+                            </div>
+
+                            <div style="padding:18px">
+                                <div class="block advert advert--mpu advert--mpu-standard-height -bp30-hdn -bp20-hdn">
+                                <div class="advert__container" id="mpu-1">
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="box widget -ondark">
+                            <h3 class="text-h3">Match Details</h3>
+                             <table class="table">
+                                <tbody>
+                                  <tr>
+                                    <td>Date</td>
+                                    <td>14th Jun 2016</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Toss</td>
+                                    <td>{{ toss }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Venue</td>
+                                    <td>{{ teamNames.teamInfo.venue }}</td>
+
+                                  </tr>
+                                  <tr>
+                                    <td>Umpires</td>
+                                    <td>{{ firstumpire }},{{ secondumpire }}</td>
+
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    </section>
+
+</div>
+{% endblock %}
